@@ -11,8 +11,8 @@ import { apiCall } from "../api/index";
 
 export function* searchMovies({ payload }) {
   try {
-    console.log("accon llamada");
-    console.log("pay", payload);
+    // console.log("accon llamada");
+    // console.log("pay", payload);
     const results = yield call(
       apiCall,
       `Search/k_Y4gF9316/${payload}`,

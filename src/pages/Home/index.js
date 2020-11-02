@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -8,9 +8,23 @@ import {
   Button,
 } from "@material-ui/core";
 import style from "./style";
-
+import { useDispatch, useSelector } from "react-redux";
+import { movieMostPopularResult } from "../../redux/selectors";
+import { searchMostPopularMovies } from "../../redux/actions/mostPopularMovie";
 export default ({ history }) => {
   const [searchText, setSearchText] = useState("");
+  const [isLooked, setIsLooked] = useState(false);
+  const dispatch = useDispatch();
+  const movieMostPopular = useSelector((state) =>
+    movieMostPopularResult(state)
+  );
+
+  useEffect(() => {
+    if (!movieMostPopular && !isLooked) {
+      setIsLooked(true);
+      dispatch(searchMostPopularMovies());
+    }
+  }, []);
 
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
